@@ -130,23 +130,23 @@ if __name__ == '__main__':
     parser.add_argument('-f', '--filename', type=str, default='prompt_tests.json', help='The name of the tests JSON file')
     parser.add_argument('-C', '--ckpt_folder', type=str, default='models/Stable-diffusion/', help='Folder where ckpts are located')
     parser.add_argument('-o', '--output_folder', type=str, default='output', help='Folder where images and text files will be saved to')
-	parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler')
-	parser.add_argument('-t', '--steps', type=int, default=20, help='Steps value')
-	parser.add_argument('-s', '--seed', type=int, default=555, help='Seed value')
-	parser.add_argument('-c', '--cfg', type=float, default=7.0, help='CFG value')
-	parser.add_argument('-w', '--width', type=int, default=512, help='Width value')
-	parser.add_argument('-h', '--height', type=int, default=512, help='Height value')
+    parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler')
+    parser.add_argument('-t', '--steps', type=int, default=20, help='Steps value')
+    parser.add_argument('-s', '--seed', type=int, default=555, help='Seed value')
+    parser.add_argument('-c', '--cfg', type=float, default=7.0, help='CFG value')
+    parser.add_argument('-w', '--width', type=int, default=512, help='Width value')
+    parser.add_argument('-h', '--height', type=int, default=512, help='Height value')
     args = parser.parse_args()
 
     filename = args.filename
     ckpt_folder = args.ckpt_folder
     output_folder = args.output_folder
-	sampler = args.sampler
+    sampler = args.sampler
     steps = args.steps
-	seed = args.seed
-    cfg = args.cfg 
-	width = args.width
-	height = args.height
+    seed = args.seed
+    cfg = args.cfg
+    width = args.width
+    height = args.height
 
     # Run main
     main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, width, height)
