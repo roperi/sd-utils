@@ -29,6 +29,7 @@ def main(filename, input_folder, target_folder, seed, samples, duplicate):
     Examples:
     $ python3 caption2prompt.py -d
     $ python3 caption2prompt.py -i input -t blip -S 15 --seed -1 -d
+    $ wget -O - https://github.com/roperi/sd-utils/raw/main/caption2prompt.py | python3 - -d
     """
     caption_list = random.sample(get_filenames_from_target_folders(input_folder, target_folder), samples)
 
