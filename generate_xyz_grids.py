@@ -1,6 +1,7 @@
 #!/usr/env/bin python3
 
 import os
+import glob
 import json
 import datetime
 import argparse
@@ -26,9 +27,9 @@ def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, se
                         sampler=sampler,
                         steps=steps
                         )
-    # Get checkpoints
+    # Get your checkpoints
     dir_name = ckpt_folder
-    ckpt_list = [name for name in os.listdir(dir_name) if name.endswith(".ckpt")]
+    ckpt_list = [os.path.basename(x) for x in glob.glob(f'{ckpt_folder}/*gs*.ckpt')]
 
     # Sort checkpoints by global step ascending
     substrings = [int(x) for string in ckpt_list for x in re.findall(r'gs(\d+)', string)]
