@@ -13,7 +13,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
     $ python3 generate_xyz_grids.py -f 'prompt_sr_tests.json' -C 'models/Stable-diffusion' -o 'output'
     $ python3 generate_xyz_grids.py -f 'xyz_prompt_tests.json'
     $ python3 generate_xyz_grids.py -f 'xyz_prompt_tests.json' -w 1024 -h 512
-    $ wget -O - https://github.com/roperi/sd-utils/raw/main/generate_xyz_grids.py | python3 - -f 'xyz_prompt_tests.json'
+    $ wget -O - https://raw.githubusercontent.com/roperi/sd-utils/main/generate_xyz_grids.py | python3 - -f 'xyz_prompt_tests.json'
     """
     # Instantiate Webuiapi
     api = webuiapi.WebUIApi(host='127.0.0.1',
