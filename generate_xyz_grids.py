@@ -35,7 +35,8 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
         prompt_tests_list = json.loads(j.read())
 
     # Create output folder
-    os.mkdir(output_folder)
+    if not os.path.exists(output_folder):
+        os.mkdir(output_folder)
 
     XYZPlotAvailableTxt2ImgScripts = [
     "Nothing",
