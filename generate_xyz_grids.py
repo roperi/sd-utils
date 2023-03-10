@@ -63,7 +63,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
 
     # Generate grid for each prompt test
     counter = 0
-    from p in prompt_tests_list:
+    for p in prompt_tests_list:
         counter += 1
         prompt = p.get('prompt')
         prompt_sr = p.get('prompt_sr')
