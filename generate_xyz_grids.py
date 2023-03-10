@@ -2,11 +2,12 @@
 
 import os
 import json
-import webuiapi
-import argparse
 import datetime
+import argparse
+import re
+import webuiapi
 
-def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, width, height):
+def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, seed, cfg_scale, width, height):
     """
     Generate XYZ grids from a prompt test JSON file and save images and their respective text files to `output` folder.
 
@@ -25,14 +26,21 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
                         sampler=sampler,
                         steps=steps
                         )
-
-    # Load checkpoints
+    # Get checkpoints
     dir_name = ckpt_folder
-    l = [name for name in os.listdir(dir_name) if name.endswith(".ckpt")]
-    l.sort()
-    # Shift last ckpt (sd1.5) to first item in list
-    l = l[-1:] + l[:-1]
-    checkpoints = ','.join(l)
+    ckpt_list = [name for name in os.listdir(dir_name) if name.endswith(".ckpt")]
+
+    # Sort checkpoints by global step ascending
+    substrings = [int(x) for string in ckpt_list for x in re.findall(r'gs(\d+)', string)]
+    substrings.sort()
+    checkpoint_list = [string for x in substrings for string in test_list if int(re.findall(r'gs(\d+)', string)[0]) == x]
+
+    # Add baseline ckpt
+    if baseline_ckpt:
+        checkpoint_list.insert(0, baseline_ckpt)
+
+    # Prepare checkpoints str
+    checkpoints = ','.join(checkpoint_list)
 
     # Load prompts
     with open (filename, 'r') as j:
@@ -135,6 +143,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--filename', type=str, default='prompt_tests.json', help='The name of the tests JSON file (default: prompt_tests.json)')
     parser.add_argument('-C', '--ckpt_folder', type=str, default='models/Stable-diffusion/', help='Folder where ckpts are located ( default: models/Stable-diffusion/ )')
+    parser.add_argument('-b', '--baseline_ckpt', type=str, default='SDv1-5.ckpt', help='Baseline checkpoint used for comparisons (default: SDv1-5.ckpt)')
     parser.add_argument('-o', '--output_folder', type=str, default='output', help='Folder where images and text files will be saved to ( default: output/ )')
     parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler (default: Euler a)')
     parser.add_argument('-t', '--steps', type=int, default=20, help='Steps value (default: 20)')
@@ -146,6 +155,7 @@ if __name__ == '__main__':
 
     filename = args.filename
     ckpt_folder = args.ckpt_folder
+    baseline_ckpt = args.baseline_ckpt
     output_folder = args.output_folder
     sampler = args.sampler
     steps = args.steps
@@ -155,4 +165,4 @@ if __name__ == '__main__':
     height = args.height
 
     # Run main
-    main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, width, height)
+    main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, seed, cfg_scale, width, height)
