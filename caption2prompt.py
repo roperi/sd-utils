@@ -74,6 +74,6 @@ if __name__ == '__main__':
     samples = args.samples 
     duplicate = args.duplicate
 
-	# Run main
+    # Run main
     main(filename, input_folder, target_folder, seed, samples, duplicate)
 
