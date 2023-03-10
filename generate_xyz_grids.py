@@ -4,6 +4,7 @@ import os
 import json
 import webuiapi
 import argparse
+import datetime
 
 def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, width, height):
     """
@@ -15,6 +16,9 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
     $ python3 generate_xyz_grids.py -f 'xyz_prompt_tests.json' -w 1024 -h 512
     $ wget -O - https://raw.githubusercontent.com/roperi/sd-utils/main/generate_xyz_grids.py | python3 - -f 'xyz_prompt_tests.json'
     """
+    # datetime
+    dt = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
     # Instantiate Webuiapi
     api = webuiapi.WebUIApi(host='127.0.0.1',
                         port=7860,
@@ -36,7 +40,9 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
 
     # Create output folder
     if not os.path.exists(output_folder):
-        os.mkdir(output_folder)
+        os.makedirs(f'{output_folder}/{dt}')
+    else:
+        os.makedirs(f'{output_folder}/{dt}')
 
     XYZPlotAvailableTxt2ImgScripts = [
     "Nothing",
@@ -72,7 +78,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
         z_axis_type = p.get('z_axis_type')
         # Prepare prompt
         XAxisType = "Seed"
-        XAxisValues = seed 
+        XAxisValues = seed
         YAxisType = "Checkpoint name"
         YAxisValues = checkpoints
         ZAxisType = z_axis_type
@@ -103,7 +109,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
                         marginSize,                        ]
                     )
         seq = '{0:0>4}'.format(counter)
-        path_filename = f'output/xyz_grid-{seq}-{seed}-{width}x{height}-{prompt}'
+        path_filename = f'{output_folder}/{dt}/xyz_grid-{seq}-{seed}-{width}x{height}-{prompt}'
         result.image.save(f'{path_filename}.png')
         # Save txt file
         image_info =  f'''
@@ -127,15 +133,15 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
 if __name__ == '__main__':
     # Parse args
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filename', type=str, default='prompt_tests.json', help='The name of the tests JSON file')
-    parser.add_argument('-C', '--ckpt_folder', type=str, default='models/Stable-diffusion/', help='Folder where ckpts are located')
-    parser.add_argument('-o', '--output_folder', type=str, default='output', help='Folder where images and text files will be saved to')
-    parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler')
-    parser.add_argument('-t', '--steps', type=int, default=20, help='Steps value')
-    parser.add_argument('-s', '--seed', type=int, default=555, help='Seed value')
-    parser.add_argument('-c', '--cfg_scale', type=float, default=7.0, help='CFG value')
-    parser.add_argument('-W', '--width', type=int, default=512, help='Width value')
-    parser.add_argument('-H', '--height', type=int, default=512, help='Height value')
+    parser.add_argument('-f', '--filename', type=str, default='prompt_tests.json', help='The name of the tests JSON file (default: prompt_tests.json)')
+    parser.add_argument('-C', '--ckpt_folder', type=str, default='models/Stable-diffusion/', help='Folder where ckpts are located ( default: models/Stable-diffusion/ )')
+    parser.add_argument('-o', '--output_folder', type=str, default='output', help='Folder where images and text files will be saved to ( default: output/ )')
+    parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler (default: Euler a)')
+    parser.add_argument('-t', '--steps', type=int, default=20, help='Steps value (default: 20)')
+    parser.add_argument('-s', '--seed', type=int, default=555, help='Seed value (default: 555)')
+    parser.add_argument('-c', '--cfg_scale', type=float, default=7.0, help='CFG value (default: 7.0)')
+    parser.add_argument('-W', '--width', type=int, default=512, help='Width value (default: 512)')
+    parser.add_argument('-H', '--height', type=int, default=512, help='Height value (default: 512)')
     args = parser.parse_args()
 
     filename = args.filename
