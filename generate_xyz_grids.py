@@ -142,7 +142,7 @@ if __name__ == '__main__':
     # Parse args
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--filename', type=str, default='prompt_tests.json', help='The name of the tests JSON file (default: prompt_tests.json)')
-    parser.add_argument('-C', '--ckpt_folder', type=str, default='models/Stable-diffusion/', help='Folder where ckpts are located ( default: models/Stable-diffusion/ )')
+    parser.add_argument('-C', '--ckpt_folder', type=str, default='models/Stable-diffusion/', help='Folder where ckpts are located ( default: models/Stable-diffusion )')
     parser.add_argument('-b', '--baseline_ckpt', type=str, default='SDv1-5.ckpt', help='Baseline checkpoint used for comparisons (default: SDv1-5.ckpt)')
     parser.add_argument('-o', '--output_folder', type=str, default='output', help='Folder where images and text files will be saved to ( default: output/ )')
     parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler (default: Euler a)')
