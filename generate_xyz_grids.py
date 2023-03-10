@@ -19,11 +19,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
     api = webuiapi.WebUIApi(host='127.0.0.1',
                         port=7860,
                         sampler=sampler,
-                        steps=steps,
-                        seed=seed,
-                        cfg_scale=cfg_scale,
-                        width=width,
-                        height=height
+                        steps=steps
                         )
 
     # Load checkpoints
@@ -88,6 +84,9 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
         result = api.txt2img(
                     prompt=prompt,
                     seed=seed,
+                    cfg_scale=cfg_scale,
+                    width=width,
+                    height=height,
                     script_name="X/Y/Z Plot",
                     script_args=[
                         XYZPlotAvailableTxt2ImgScripts.index(XAxisType),
@@ -133,9 +132,9 @@ if __name__ == '__main__':
     parser.add_argument('-S', '--sampler', type=str, default='Euler a', help='Sampler')
     parser.add_argument('-t', '--steps', type=int, default=20, help='Steps value')
     parser.add_argument('-s', '--seed', type=int, default=555, help='Seed value')
-    parser.add_argument('-c', '--cfg', type=float, default=7.0, help='CFG value')
-    parser.add_argument('-w', '--width', type=int, default=512, help='Width value')
-    parser.add_argument('-h', '--height', type=int, default=512, help='Height value')
+    parser.add_argument('-c', '--cfg_scale', type=float, default=7.0, help='CFG value')
+    parser.add_argument('-W', '--width', type=int, default=512, help='Width value')
+    parser.add_argument('-H', '--height', type=int, default=512, help='Height value')
     args = parser.parse_args()
 
     filename = args.filename
@@ -144,7 +143,7 @@ if __name__ == '__main__':
     sampler = args.sampler
     steps = args.steps
     seed = args.seed
-    cfg = args.cfg
+    cfg_scale = args.cfg_scale
     width = args.width
     height = args.height
 
