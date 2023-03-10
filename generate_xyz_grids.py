@@ -103,7 +103,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
                         marginSize,                        ]
                     )
         seq = '{0:0>4}'.format(counter)
-        path_filename = f'output/xyz_grid-{seq}-{seed}-{prompt}'
+        path_filename = f'output/xyz_grid-{seq}-{seed}-{width}x{height}-{prompt}'
         result.image.save(f'{path_filename}.png')
         # Save txt file
         image_info =  f'''
