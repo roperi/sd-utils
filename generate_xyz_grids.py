@@ -33,7 +33,7 @@ def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, se
     # Sort checkpoints by global step ascending
     substrings = [int(x) for string in ckpt_list for x in re.findall(r'gs(\d+)', string)]
     substrings.sort()
-    checkpoint_list = [string for x in substrings for string in test_list if int(re.findall(r'gs(\d+)', string)[0]) == x]
+    checkpoint_list = [string for x in substrings for string in ckpt_list if int(re.findall(r'gs(\d+)', string)[0]) == x]
 
     # Add baseline ckpt
     if baseline_ckpt:
