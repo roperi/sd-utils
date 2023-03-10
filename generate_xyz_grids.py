@@ -68,7 +68,7 @@ def main(filename, ckpt_folder, output_folder, sampler, steps, seed, cfg_scale, 
         counter += 1
         prompt = p.get('prompt')
         prompt_sr = p.get('prompt_sr')
-        seed = p.get('seed')
+        seed = str(p.get('seed'))
         z_axis_type = p.get('z_axis_type')
         # Prepare prompt
         XAxisType = "Seed"
