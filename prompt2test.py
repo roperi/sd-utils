@@ -12,7 +12,7 @@ def main(filename, prompt, prompt_sr, seed):
     Examples:
     $ prompt2test.py -p 'A scene from 10 Cloverfield Lane' -r '10 Cloverfield Lane, nightmare on elm street, matrix, star wars, 20th century women, toy story'
     $ prompt2test.py -p 'A photo of a cartoon character' -r 'cartoon character, monkey, dog, cat, statue, painting, pottery, car, house, city'
-    $ prompt2test.py -p 'A photo of Charlize Theron' -r 'Charlize Theron, Morgan Freeman, Michelle Obama, Mark Zuckerberg, Rihanna, emma watson, person, man, woman, boy, girl'
+    $ prompt2test.py -p 'A photo of Morgan Freeman' -r 'Morgan Freeman, Tom Cruise, Rihanna, Emma Watson, person, man, woman, boy, girl'
     """
     # Open tests file
     try:
@@ -22,7 +22,7 @@ def main(filename, prompt, prompt_sr, seed):
         data = []
     # Add test to file
     data.extend([{
-         'prompt': prompt, 
+         'prompt': prompt,
          'prompt_sr': prompt_sr,
          'seed': seed,
          'z_axis_type': "Prompt S/R"
