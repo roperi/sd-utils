@@ -63,7 +63,7 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--input_folder', type=str, default='input', help='The root folder where subfolders with caption filenames are located (default: input)')
     parser.add_argument('-t', '--target_folder', type=str, default='blip', help='The name of the folder that contains caption filenames (default: blip)')
     parser.add_argument('--seed', type=int, default=555, help='Seed value (default: 555)')
-    parser.add_argument('-S', '--samples', type=int, default=15, help='Number of filenames to generate (default: 15)')
+    parser.add_argument('-p', '--prompts', type=int, default=15, help='Number of prompts to generate at random from the input folder (default: 15)')
     parser.add_argument('-d', '--duplicate', action="store_true", default=False, help='Duplicate every caption without its token (default: False)')
     args = parser.parse_args()
 
