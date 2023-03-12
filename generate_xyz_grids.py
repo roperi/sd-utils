@@ -122,19 +122,19 @@ def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, se
         result.image.save(f'{path_filename}.png')
         # Save txt file
         image_info =  f'''
-        Prompt: {prompt}
-        Steps: {steps}
-        Sampler: {sampler}
-        CFG scale: {cfg_scale}
-        Script: X/Y/Z plot
-        X Type: Seed
-        X Values: {seed}
-        Fixed X Values: {seed}
-        Y Type: Checkpoint name
-        Y Values: {checkpoints}
-        Z Type: {z_axis_type}
-        Z Values: "{prompt_sr}"
-        '''
+Prompt: {prompt}
+Steps: {steps}
+Sampler: {sampler}
+CFG scale: {cfg_scale}
+Script: X/Y/Z plot
+X Type: Seed
+X Values: {seed}
+Fixed X Values: {seed}
+Y Type: Checkpoint name
+Y Values: {checkpoints}
+Z Type: {z_axis_type}
+Z Values: "{prompt_sr}"
+'''
         with open(f"{path_filename}.txt", "w") as f:
             f.write(image_info)
 
