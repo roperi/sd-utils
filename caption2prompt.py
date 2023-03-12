@@ -29,7 +29,7 @@ def main(filename, input_folder, target_folder, seed, samples, duplicate):
     Examples:
     $ python3 caption2prompt.py -d
     $ python3 caption2prompt.py -i input -t blip -S 15 --seed -1 -d
-    $ wget -O - https://github.com/roperi/sd-utils/raw/main/caption2prompt.py | python3 - -d
+    $ wget -O - https://github.com/roperi/sd-utils/raw/main/caption2prompt.py | python3 - -d -S 30
     """
     caption_list = random.sample(get_filenames_from_target_folders(input_folder, target_folder), samples)
 
@@ -59,19 +59,19 @@ def main(filename, input_folder, target_folder, seed, samples, duplicate):
 if __name__ == '__main__':
     # Parse arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--filename', type=str, default='xyz_prompt_tests.json', help='The name of the tests JSON file')
-    parser.add_argument('-i', '--input_folder', type=str, default='input', help='The root folder where subfolders with caption filenames are located')
-    parser.add_argument('-t', '--target_folder', type=str, default='blip', help='The name of the folder that contains caption filenames')
-    parser.add_argument('--seed', type=int, default=555, help='Seed value')
-    parser.add_argument('-S', '--samples', type=int, default=15, help='Number of filenames to generate')
-    parser.add_argument('-d', '--duplicate', action="store_true", default=False, help='Duplicate every caption without its token (Def: True)')
+    parser.add_argument('-f', '--filename', type=str, default='xyz_prompt_tests.json', help='The name of the tests JSON file (default: xyz_prompt_tests.json)')
+    parser.add_argument('-i', '--input_folder', type=str, default='input', help='The root folder where subfolders with caption filenames are located (default: input)')
+    parser.add_argument('-t', '--target_folder', type=str, default='blip', help='The name of the folder that contains caption filenames (default: blip)')
+    parser.add_argument('--seed', type=int, default=555, help='Seed value (default: 555)')
+    parser.add_argument('-S', '--samples', type=int, default=15, help='Number of filenames to generate (default: 15)')
+    parser.add_argument('-d', '--duplicate', action="store_true", default=False, help='Duplicate every caption without its token (default: False)')
     args = parser.parse_args()
 
     filename = args.filename
     input_folder = args.input_folder
-    target_folder = args.target_folder 
-    seed = args.seed 
-    samples = args.samples 
+    target_folder = args.target_folder
+    seed = args.seed
+    samples = args.samples
     duplicate = args.duplicate
 
     # Run main
