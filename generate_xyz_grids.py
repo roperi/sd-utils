@@ -82,7 +82,7 @@ def main(filename, ckpt_folder, checkpoints, baseline_ckpt, output_folder, sampl
     counter = 0
     for p in prompt_tests_list:
         counter += 1
-        print(f'Generating image {counter} out of {len(prompt_tests_list)} prompt tests')
+        print(f'Generating xyz grid {counter} out of {len(prompt_tests_list)} prompt tests')
         prompt = p.get('prompt')
         prompt_sr = p.get('prompt_sr')
         seed = str(p.get('seed'))
