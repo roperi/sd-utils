@@ -46,6 +46,7 @@ def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, se
     # Load prompts
     with open (filename, 'r') as j:
         prompt_tests_list = json.loads(j.read())
+        print(f'Loaded {len(prompt_tests_list)} prompt tests')
 
     # Create output folder
     if not os.path.exists(output_folder):
@@ -81,6 +82,7 @@ def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, se
     counter = 0
     for p in prompt_tests_list:
         counter += 1
+        print(f'Generating image #{counter} out of {len(prompt_tests_list)} prompt tests')
         prompt = p.get('prompt')
         prompt_sr = p.get('prompt_sr')
         seed = str(p.get('seed'))
@@ -119,6 +121,7 @@ def main(filename, ckpt_folder, baseline_ckpt, output_folder, sampler, steps, se
                     )
         seq = '{0:0>4}'.format(counter)
         path_filename = f'{output_folder}/{dt}/xyz_grid-{seq}-{seed}-{width}x{height}-{prompt}'
+        print(f'Saving image as {path_filename}.png')
         result.image.save(f'{path_filename}.png')
         # Save txt file
         image_info =  f'''
