@@ -106,7 +106,7 @@ def main(filename, ckpt_folder, checkpoints, baseline_ckpt, output_folder, sampl
                     width=width,
                     height=height,
                     script_name="X/Y/Z Plot",
-                    denoising_strengt=0.7,
+                    denoising_strength=0.7,
                     seed_resize_from_h=0,
                     seed_resize_from_w=0,
                     script_args=[
